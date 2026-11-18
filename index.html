@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GATE CS – Subject-wise Patterns & Resources</title>
+<style>
+:root{--bg:#f7f7f5;--card:#fff;--tx:#1c1c1a;--mu:#666;--ac:#1a56db;--bd:#e2e2dc;--chip:#eef2ff}
+@media(prefers-color-scheme:dark){:root{--bg:#141416;--card:#1e1e22;--tx:#eee;--mu:#9a9aa3;--ac:#7aa2ff;--bd:#33333a;--chip:#262a3d}}
+*{box-sizing:border-box}body{margin:0;font:16px/1.55 system-ui,sans-serif;background:var(--bg);color:var(--tx)}
+header{padding:28px 16px 12px;max-width:980px;margin:auto}h1{margin:0 0 6px;font-size:1.7rem}
+p.s{color:var(--mu);margin:0}main{max-width:980px;margin:auto;padding:0 16px 48px}
+.bar{position:sticky;top:0;background:var(--bg);padding:10px 0;display:flex;gap:8px;flex-wrap:wrap;z-index:5;border-bottom:1px solid var(--bd)}
+input{flex:1;min-width:200px;padding:9px 12px;border:1px solid var(--bd);border-radius:8px;background:var(--card);color:var(--tx);font:inherit}
+.chip{padding:6px 12px;border:1px solid var(--bd);border-radius:99px;background:var(--card);color:var(--tx);cursor:pointer;font:inherit;font-size:.85rem}
+.chip.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;margin:16px 0;overflow:hidden}
+.card>summary{padding:14px 16px;cursor:pointer;display:flex;justify-content:space-between;gap:10px;font-weight:600;list-style:none}
+.card>summary::-webkit-details-marker{display:none}
+.m{font-weight:400;color:var(--mu);font-size:.85rem}
+.body{padding:0 16px 16px}h3{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--mu);margin:16px 0 6px}
+ul{margin:0;padding-left:20px}table{width:100%;border-collapse:collapse;font-size:.92rem}
+td,th{text-align:left;padding:7px 8px;border-bottom:1px solid var(--bd);vertical-align:top}
+a{color:var(--ac);text-decoration:none}a:hover{text-decoration:underline}
+.t{display:inline-block;background:var(--chip);border-radius:6px;padding:1px 8px;font-size:.78rem;margin:0 4px 4px 0}
+.note{background:var(--chip);border-radius:10px;padding:12px 14px;font-size:.9rem;margin:14px 0}
+.hide{display:none}footer{max-width:980px;margin:auto;padding:0 16px 40px;color:var(--mu);font-size:.85rem}
+</style></head><body>
+<header><h1>GATE CS – Subject-wise Patterns & Resources</h1>
+<p class="s">What each subject asks, how often, and where to practise and learn it.</p>
+<div class="note"><b>Exam format (recent years):</b> 65 questions, 100 marks, 180 min — General Aptitude 15 marks + 85 marks technical (Engg. Maths + core CS). Question types: MCQ, MSQ, NAT; 1- and 2-mark questions. Weightages below are <b>approximate typical ranges</b> compiled from the recurring paper pattern, not exact counts for any one year.</div></header>
+<main>
+<div class="bar"><input id="q" placeholder="Search subject or topic (e.g. pipelining, normalization)…">
+<span id="chips"></span></div>
+<div id="list"></div>
+<div class="card"><div class="body"><h3>Question paper sources</h3><ul id="src"></ul></div></div>
+</main>
+<footer>Question links open GATE Overflow / YouTube searches for the topic so they stay valid; swap in specific question or video URLs in the <code>DATA</code> array below as you curate them.</footer>
+<script>
+const yt=q=>"https://www.youtube.com/results?search_query="+encodeURIComponent(q);
+const go=q=>"https://gateoverflow.in/search?q="+encodeURIComponent(q);
+const gfg=q=>"https://www.google.com/search?q="+encodeURIComponent("site:geeksforgeeks.org gate "+q);
+const SOURCES=[
+["GATE Overflow – all GATE CSE questions with community answers","https://gateoverflow.in/"],
+["GATE CSE papers year-wise (Careers360)","https://engineering.careers360.com/articles/gate-cse-question-papers"],
+["GATE CSE PYQ list 2014–2026 with official keys (themlhub)","https://themlhub.ai/blog/gate-cse-previous-year-question-papers"],
+["GeeksforGeeks solved GATE papers","https://www.geeksforgeeks.org/?p=517283"],
+["Official GATE site (IIT, current year – papers & answer keys)","https://gate2027.iitr.ac.in/"]];
+// DATA: edit freely. topics: [name, frequency(H/M/L), typical question style]
+const DATA=[
+{n:"Engineering Mathematics",w:"12–15",
+ pat:["Discrete Math (sets, relations, groups, lattices, graph theory, combinatorics, propositional/first-order logic) is the largest chunk.","Probability & statistics: conditional probability, Bayes, distributions, expectation – mostly NAT.","Linear algebra: rank, eigenvalues, determinants, system of equations.","Calculus: limits, maxima/minima, definite integrals – 1-2 questions."],
+ topics:[["Graph theory","H","Counting, connectivity, planarity, coloring"],["Combinatorics & recurrence","H","Counting arrangements, solving recurrences"],["Propositional & first-order logic","H","Equivalence, validity, formalising statements"],["Probability","H","Conditional, Bayes, random variables"],["Linear algebra","M","Eigenvalues, rank, determinant"],["Set theory, relations, groups, lattices","M","Properties, partial orders, Hasse diagrams"],["Calculus","L","Limits, integrals, optimisation"]]},
+{n:"Digital Logic",w:"4–6",
+ pat:["Minimisation and implementation: K-maps, SOP/POS, using MUX/decoders.","Sequential circuits: flip-flop conversion, counters, state machines.","Number systems: 2's complement, IEEE 754 float, overflow, adders."],
+ topics:[["K-map & Boolean minimisation","H","Minimal expressions, prime implicants"],["Sequential circuits & counters","H","Next-state, counter sequences"],["Combinational circuits (MUX, adder)","M","Realise function using given blocks"],["Number representation & IEEE 754","M","Conversions, range, overflow"]]},
+{n:"Computer Organization & Architecture",w:"6–8",
+ pat:["Pipelining (hazards, speedup, stalls) appears almost every year.","Cache memory: mapping, hit ratio, AMAT – frequent NAT.","Instruction formats, addressing modes, and I/O (DMA, interrupts).","Data path and control unit, plus basic memory hierarchy."],
+ topics:[["Pipelining & hazards","H","CPI, stalls, speedup calculations"],["Cache memory","H","Tag/index bits, hit-ratio, AMAT"],["Instruction formats & addressing","M","Encoding size, effective address"],["I/O, DMA, interrupts","M","Transfer time, cycle stealing"],["Virtual memory (hardware side)","L","TLB, page table size"]]},
+{n:"Programming & Data Structures",w:"8–12",
+ pat:["C output-prediction: pointers, recursion, arrays, static/global, macros.","Trees: BST, AVL, heaps, traversals – counting & construction.","Linked lists, stacks, queues, hashing (collisions, probing)."],
+ topics:[["C pointers, recursion & output tracing","H","Predict output / value after code runs"],["Binary trees, BST, AVL","H","Traversals, height, insertion results"],["Heaps & priority queues","M","Build-heap, operations, array positions"],["Hashing","M","Collisions, probing results"],["Linked list, stack, queue","M","Operation sequences, implementation"],["Python (recent syllabus)","L","Basic code reading"]]},
+{n:"Algorithms",w:"6–9",
+ pat:["Asymptotic analysis and recurrence solving (Master theorem).","Graph algorithms: shortest path, MST, BFS/DFS, topological sort.","Design paradigms: greedy, divide & conquer, dynamic programming.","Sorting and searching complexity; NP-completeness concepts."],
+ topics:[["Asymptotic notation & recurrences","H","Order growth, Master theorem"],["Graph algorithms (Dijkstra, MST, DFS)","H","Run algorithm on a graph; complexity"],["Dynamic programming","H","Identify recurrence, table values"],["Greedy (Huffman, scheduling)","M","Optimality, cost computation"],["Sorting & searching","M","Comparisons count, best/worst case"],["P, NP, NP-complete","L","True/false statements (MSQ)"]]},
+{n:"Theory of Computation",w:"5–8",
+ pat:["Regular languages: DFA/NFA states, closure properties, regular expressions.","CFL/PDA: ambiguity, closure, pumping lemma.","Decidability: Turing machines, recursive vs RE languages, reductions."],
+ topics:[["DFA/NFA & regular expressions","H","Min states, language identification"],["Closure properties","H","Which operations preserve a class (MSQ)"],["CFG & PDA","M","Language of grammar, ambiguity"],["Pumping lemma","M","Prove/identify non-regular/non-CFL"],["Decidability & Turing machines","H","Decidable / RE / undecidable classification"]]},
+{n:"Compiler Design",w:"4–6",
+ pat:["Parsing: FIRST/FOLLOW, LL(1), LR(0)/SLR/LALR item sets.","Syntax-directed translation and intermediate code (three-address code).","Code optimisation, basic blocks, register allocation; lexical analysis."],
+ topics:[["FIRST/FOLLOW & LL(1)","H","Compute sets, check LL(1)"],["LR parsers (SLR, LALR, CLR)","H","Number of states, conflicts"],["Syntax-directed translation","M","Attribute evaluation"],["Intermediate code & optimisation","M","Count temporaries, basic blocks, DAG"],["Lexical analysis","L","Tokens count"]]},
+{n:"Operating Systems",w:"7–10",
+ pat:["Process synchronisation: semaphores, mutex, producer-consumer – almost always present.","CPU scheduling & deadlocks (Banker's) – numeric NAT.","Memory management: paging, page replacement, TLB, effective access time.","File systems / disk scheduling and threads."],
+ topics:[["Process synchronisation (semaphores)","H","Find correct/incorrect sync solution; output"],["CPU scheduling","H","Avg waiting/turnaround with Gantt chart"],["Deadlock","M","Safe state, resource allocation"],["Paging & virtual memory","H","Page faults, EAT, table size"],["Disk scheduling & file systems","M","Seek time, inode/block calculations"]]},
+{n:"Databases (DBMS)",w:"6–9",
+ pat:["Normalisation: candidate keys, BCNF/3NF, decomposition – every year.","SQL queries and relational algebra/tuple calculus (output of query).","Transactions & concurrency: serializability, 2PL, recoverability.","File organisation/indexing: B/B+ trees order, record counts; ER model."],
+ topics:[["Functional dependencies & normal forms","H","Keys, highest normal form"],["SQL & relational algebra","H","Query output / equivalence"],["Transactions & serializability","H","Conflict serializable schedules"],["B/B+ trees & indexing","M","Order, height, block accesses"],["ER model","L","Minimum tables / cardinality"]]},
+{n:"Computer Networks",w:"6–9",
+ pat:["Data link: sliding window, CSMA/CD, throughput/efficiency – numerical.","IP addressing, subnetting, CIDR, routing (DV/LS), NAT.","Transport: TCP congestion control, flow control, UDP.","Application layer protocols and network security basics."],
+ topics:[["Sliding window & flow control","H","Efficiency, window size"],["IP addressing & subnetting","H","Subnet masks, number of hosts, CIDR"],["TCP congestion control","H","cwnd evolution"],["Routing (DV/LS)","M","Table update, count-to-infinity"],["CSMA/CD & Ethernet","M","Min frame size, throughput"],["Application layer & security","L","DNS/HTTP/SMTP, encryption"]]},
+{n:"General Aptitude",w:"15",
+ pat:["5 questions of 1 mark + 5 of 2 marks (10 questions, 15 marks).","Verbal: grammar, sentence completion, para-jumbles, critical reasoning.","Quantitative: ratio, percentages, time-work, number series, data interpretation.","Analytical: seating arrangement, logical deduction, spatial/pattern reasoning."],
+ topics:[["Verbal ability","H","Grammar, vocabulary, comprehension"],["Quantitative aptitude","H","Arithmetic, algebra, DI"],["Logical & spatial reasoning","M","Puzzles, patterns, paper-folding"]]}];
+const FREQ={H:"High",M:"Medium",L:"Low"};
+let active="All";
+function render(){
+ const t=document.getElementById("q").value.toLowerCase(),L=document.getElementById("list");L.innerHTML="";
+ DATA.forEach(s=>{
+  if(active!="All"&&s.n!=active)return;
+  const hay=(s.n+s.pat.join(" ")+s.topics.map(x=>x[0]).join(" ")).toLowerCase();
+  if(t&&!hay.includes(t))return;
+  const d=document.createElement("details");d.className="card";if(t||active!="All")d.open=true;
+  d.innerHTML=`<summary><span>${s.n}</span><span class="m">~${s.w} marks</span></summary><div class="body">
+  <h3>Pattern</h3><ul>${s.pat.map(p=>`<li>${p}</li>`).join("")}</ul>
+  <h3>Topics, frequency & resources</h3><table><tr><th>Topic</th><th>Freq.</th><th>Typical question</th><th>Links</th></tr>
+  ${s.topics.map(([a,f,q])=>`<tr><td>${a}</td><td><span class="t">${FREQ[f]}</span></td><td>${q}</td>
+  <td><a target="_blank" rel="noopener" href="${go(a)}">Questions</a> · <a target="_blank" rel="noopener" href="${yt("GATE "+a+" explained previous year questions")}">Videos</a> · <a target="_blank" rel="noopener" href="${gfg(a)}">Notes</a></td></tr>`).join("")}</table>
+  <h3>Full playlists</h3><span class="t"><a target="_blank" rel="noopener" href="${yt(s.n+" GATE Gate Smashers")}">Gate Smashers</a></span>
+  <span class="t"><a target="_blank" rel="noopener" href="${yt(s.n+" GATE Knowledge Gate")}">Knowledge Gate</a></span>
+  <span class="t"><a target="_blank" rel="noopener" href="${yt(s.n+" NPTEL")}">NPTEL</a></span>
+  <span class="t"><a target="_blank" rel="noopener" href="${yt(s.n+" GATE PYQ solutions")}">PYQ solutions</a></span></div>`;
+  L.appendChild(d);});
+}
+const C=document.getElementById("chips");
+["All",...DATA.map(s=>s.n)].forEach(n=>{const b=document.createElement("button");b.className="chip"+(n=="All"?" on":"");b.textContent=n.replace("Computer Organization & Architecture","COA").replace("Programming & Data Structures","PDS").replace("Engineering Mathematics","Maths").replace("Theory of Computation","TOC").replace("Operating Systems","OS").replace("Databases (DBMS)","DBMS").replace("Computer Networks","CN").replace("Compiler Design","Compiler").replace("General Aptitude","GA");
+ b.onclick=()=>{active=n;[...C.children].forEach(c=>c.classList.remove("on"));b.classList.add("on");render()};C.appendChild(b)});
+document.getElementById("q").oninput=render;
+document.getElementById("src").innerHTML=SOURCES.map(([a,u])=>`<li><a target="_blank" rel="noopener" href="${u}">${a}</a></li>`).join("");
+render();
+</script></body></html>
