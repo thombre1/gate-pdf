@@ -25,15 +25,13 @@ a{color:var(--ac);text-decoration:none}a:hover{text-decoration:underline}
 .hide{display:none}footer{max-width:980px;margin:auto;padding:0 16px 40px;color:var(--mu);font-size:.85rem}
 </style></head><body>
 <header><h1>GATE CS – Subject-wise Patterns & Resources</h1>
-<p class="s">What each subject asks, how often, and where to practise and learn it.</p>
-<div class="note"><b>Exam format (recent years):</b> 65 questions, 100 marks, 180 min — General Aptitude 15 marks + 85 marks technical (Engg. Maths + core CS). Question types: MCQ, MSQ, NAT; 1- and 2-mark questions. Weightages below are <b>approximate typical ranges</b> compiled from the recurring paper pattern, not exact counts for any one year.</div></header>
 <main>
+	<div><p>You got this, bucky</p></div>
 <div class="bar"><input id="q" placeholder="Search subject or topic (e.g. pipelining, normalization)…">
 <span id="chips"></span></div>
 <div id="list"></div>
 <div class="card"><div class="body"><h3>Question paper sources</h3><ul id="src"></ul></div></div>
 </main>
-<footer>Question links open GATE Overflow / YouTube searches for the topic so they stay valid; swap in specific question or video URLs in the <code>DATA</code> array below as you curate them.</footer>
 <script>
 const yt=q=>"https://www.youtube.com/results?search_query="+encodeURIComponent(q);
 const go=q=>"https://gateoverflow.in/search?q="+encodeURIComponent(q);
